@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Membership Bengkel</title>
+  <style>
+    body{
+      font-family: "Poppins", Arial, sans-serif; /* font utama */
+      background: linear-gradient(135deg, #dbe7ff, #f6f9ff); /* gradasi background */
+      padding:40px; /* jarak dari tepi layar */
+    }
+    .container{
+      background:white; /* card putih */
+      max-width:560px; /* lebar maksimum form */
+      margin:auto; /* center */
+      padding:28px; /* isi dalam container */
+      border-radius:18px; /* sudut membulat */
+      box-shadow:0 10px 28px rgba(0,0,0,0.12); /* shadow */
+      border:1px solid #e4ebf7; /* garis tipis */
+      backdrop-filter: blur(6px); /* efek blur modern */
+      animation: fadeIn 0.5s ease; /* animasi masuk */
+    }
+    @keyframes fadeIn {
+      from {opacity:0; transform: translateY(10px);} 
+      to {opacity:1; transform: translateY(0);} 
+    }
+    h2{
+      text-align:center; /* judul di tengah */
+      margin-bottom:25px;
+      font-weight:700;
+      letter-spacing:0.5px;
+      color:#1f2c5c;
+    }
+    label{
+      font-weight:600; /* tulisan label lebih tebal */
+      margin-top:14px;
+      display:block;
+      color:#2c3e70;
+    }
+    input,select{
+      width:100%; /* full lebar */
+      padding:12px;
+      margin-top:6px;
+      border-radius:10px; /* membulat */
+      border:1.6px solid #cbd6e7;
+      background:#fdfdff;
+      transition:0.25s; /* animasi saat focus */
+      font-size:15px;
+    }
+    input:focus,select:focus{
+      border-color:#6c9bff; /* warna border saat fokus */
+      background:white;
+      box-shadow:0 0 10px rgba(108,155,255,0.35); /* efek glow */
+      transform: scale(1.01); /* sedikit membesar */
+    }
+    button{
+      width:100%;
+      padding:13px;
+      background:linear-gradient(135deg, #3b6bff, #2550d8); /* warna tombol */
+      border:none;
+      border-radius:12px;
+      color:white;
+      margin-top:24px;
+      cursor:pointer;
+      font-weight:bold;
+      font-size:16px;
+      transition:0.25s;
+      letter-spacing:0.5px;
+    }
+    button:hover{
+      transform: scale(1.03); /* membesar saat hover */
+      box-shadow:0 6px 16px rgba(59,107,255,0.35); /* bayangan hover */
+    }
+    #output{
+      margin-top:32px;
+      background:linear-gradient(135deg, #eef3ff, #f5f7ff); /* kotak hasil lebih lembut */
+      padding:20px;
+      border-radius:14px;
+      font-size:15px;
+      border:1px solid #d3dbf5;
+      box-shadow:0 4px 14px rgba(0,0,0,0.08);
+      animation: fadeIn 0.5s ease;
+    }
+    .title{
+      font-weight:700; /* judul section */
+      font-size:18px;
+      margin-bottom:10px;
+      color:#1b2a70;
+      border-left:4px solid #4d7bff; /* garis aksen kiri */
+      padding-left:8px;
+    }
+
+    .btn-kembali {
+      width: 100%;
+      padding: 12px;
+      background: #9aa4c6; /* warna tombol kembali */
+      border: none;
+      border-radius: 12px;
+      color: white;
+      margin-top: 12px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 15px;
+      transition: 0.25s;
+    }
+
+    .btn-kembali:hover {
+      background: #7c86a8; /* hover lebih gelap */
+      transform: scale(1.02);
+    }
+  </style>
+</head>
+<body>
+  <div class="container"> <!-- pembungkus utama form -->
+    <h2>Form Membership Bengkel</h2>
+
+    <label>Nama Lengkap</label> <!-- label input -->
+    <input id="nama" type="text" placeholder="Masukkan nama..." /> <!-- input nama -->
+
+    <label>Email</label>
+    <input id="email" type="email" placeholder="email@contoh.com" />
+
+    <label>No Telepon</label>
+    <input id="telepon" type="text" placeholder="08xxxx" />
+
+    <label>Jenis Kendaraan</label>
+    <select id="kendaraan">
+      <option>Motor</option>
+      <option>Mobil</option>
+    </select>
+
+    <label>Nomor Polisi</label>
+    <input id="nopol" type="text" placeholder="B 1234 CD" />
+
+    <label>Pilih Paket Membership</label>
+    <select id="paket">
+      <option value="1">Silver - 350K</option>
+      <option value="2">Gold - 500K</option>
+      <option value="3">Platinum - 700K</option>
+    </select>
+
+    <button onclick="proses()">Simpan Data</button> <!-- tombol memproses -->
+    <button class="btn-kembali" onclick="history.back()">Kembali ke Beranda</button> <!-- tombol kembali -->
+
+    <div id="output"></div> <!-- tempat hasil muncul -->
+  </div>
+
+  <script>
+    function proses(){ /* fungsi utama memproses form */
+      let nama = document.getElementById("nama").value; /* ambil input */
+      let email = document.getElementById("email").value;
+      let telepon = document.getElementById("telepon").value;
+      let kendaraan = document.getElementById("kendaraan").value;
+      let nopol = document.getElementById("nopol").value;
+      let paket = document.getElementById("paket").value;
+
+      let harga = 0; /* placeholder harga */
+      let benefit = ""; /* placeholder benefit */
+      let lama = ""; /* durasi membership */
+
+      /* pengecekan paket + set manfaat */
+      if(paket == "1"){
+        harga = 350000;
+        benefit = "Diskon Servis 5% + Cek Berkala 1x";
+        lama = "1 Tahun";
+      } else if(paket == "2"){
+        harga = 500000;
+        benefit = "Diskon Servis 10% + Sparepart 5% + Cek Berkala 2x";
+        lama = "1 Tahun";
+      } else {
+        harga = 700000;
+        benefit = "Diskon Servis 15% + Sparepart 10% + Cek Berkala 4x + VIP";
+        lama = "1 Tahun (Full VIP)";
+      }
+
+      /* tampilkan hasil ke div #output */
+      document.getElementById("output").innerHTML = `
+        <div class='title'>Data Member</div>
+        Nama: <b>${nama}</b><br>
+        Email: ${email}<br>
+        Telepon: ${telepon}<br>
+        Kendaraan: ${kendaraan}<br>
+        Nomor Polisi: ${nopol}<br><br>
+        <div class='title'>Paket Member</div>
+        Harga: Rp ${harga.toLocaleString('id-ID')} <br>
+        Benefit: ${benefit}<br>
+        Berlaku: ${lama}
+      `;
+    }
+  </script>
+</body>
+</html>
